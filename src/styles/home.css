@@ -1,0 +1,10 @@
+
+h2 {
+    color: red;
+}
+
+.inline-scroll {
+    overflow-x: scoll;
+    overflow-y: hidden;
+    white-space: nowrap;
+}
