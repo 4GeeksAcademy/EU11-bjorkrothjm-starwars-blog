@@ -2,6 +2,7 @@ const { json } = require("react-router");
 
 const getState = ({ getStore, getActions, setStore }) => {
 
+	// Function to fetch from API 
 	const loadData = async (serverUrl) => {
 		try{
 			const response = await fetch(serverUrl)
@@ -31,7 +32,9 @@ const getState = ({ getStore, getActions, setStore }) => {
 					initial: "white"
 				}
 			],
-			people : []
+			people : [],
+			vehicles : [],
+			planets : []
 		},
 		actions: {
 			// Use getActions to call a function within a fuction
@@ -39,21 +42,53 @@ const getState = ({ getStore, getActions, setStore }) => {
 				getActions().changeColor(0, "green");
 			},
 
+			// NOTE create a smoother solution later by using the store values (need to remove demo first?)
 			loadSomeData:async () => {
-
-				const serverUrl = "https://www.swapi.tech/api/people"
-				const unspecificApiData = await loadData(serverUrl)
-				console.log("unspecificApiData", unspecificApiData);
-				const peopleArr = []
-
-				for (const item of unspecificApiData.results){
-					console.log(item.url)
-					let temp = await loadData(item.url)
-					peopleArr.push (temp.result.properties)
+				let tempArrays = {
+					people : [],
+					vehicles : [],
+					planets : []
 				};
-				console.log("DONE")
-				console.log(peopleArr)
-				setStore({people: peopleArr})
+				// , "vehicles", "planets"
+				for (const category of ["people"]){
+					const serverUrl = "https://www.swapi.tech/api/" + category
+					const unspecificApiData = await loadData(serverUrl)
+					console.log("unspecificApiData", unspecificApiData);
+
+
+					for (const item of unspecificApiData.results){
+						console.log(item.url)
+						let temp = await loadData(item.url)
+						tempArrays[category].push(temp.result.properties)
+						//peopleArr.push (temp.result.properties) // OLD CODE - TO BE REMOVED
+					};
+					console.log("DONE")
+					// console.log(peopleArr)
+					// setStore({people: peopleArr})
+					console.log(tempArrays[category]);
+			
+				}
+				// setStore({people: tempArrays[people], })
+				setStore(tempArrays)
+				
+
+				// WORKING CODE
+
+				// const serverUrl = "https://www.swapi.tech/api/" + item
+				// const unspecificApiData = await loadData(serverUrl)
+				// console.log("unspecificApiData", unspecificApiData);
+				// const peopleArr = []
+
+				// for (const item of unspecificApiData.results){
+				// 	console.log(item.url)
+				// 	let temp = await loadData(item.url)
+				// 	peopleArr.push (temp.result.properties)
+				// };
+				// console.log("DONE")
+				// console.log(peopleArr)
+				// setStore({people: peopleArr})
+
+				//
 
 				// const resultArray  = await Promise.all(unspecificApiData.map( async (item) => {
 				// 	loadData2(item.url)
