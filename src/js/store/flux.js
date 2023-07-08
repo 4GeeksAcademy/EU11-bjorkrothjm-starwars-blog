@@ -34,7 +34,8 @@ const getState = ({ getStore, getActions, setStore }) => {
 			],
 			people : [],
 			vehicles : [],
-			planets : []
+			planets : [],
+			favorites : []
 		},
 		actions: {
 			// Use getActions to call a function within a fuction
@@ -47,7 +48,8 @@ const getState = ({ getStore, getActions, setStore }) => {
 				let tempArrays = {
 					people : [],
 					vehicles : [],
-					planets : []
+					planets : [],
+					favorites : []
 				};
 				// , "vehicles", "planets"
 				for (const category of ["people"]){
@@ -59,7 +61,8 @@ const getState = ({ getStore, getActions, setStore }) => {
 					for (const item of unspecificApiData.results){
 						console.log(item.url)
 						let temp = await loadData(item.url)
-						tempArrays[category].push(temp.result.properties)
+						// tempArrays[category].push(temp.result.properties)
+						tempArrays[category].push(temp.result)
 						//peopleArr.push (temp.result.properties) // OLD CODE - TO BE REMOVED
 					};
 					console.log("DONE")
@@ -114,6 +117,18 @@ const getState = ({ getStore, getActions, setStore }) => {
 
 		
 			},
+
+			addFavorite: (store, _id, name) => {
+				console.log(name, _id)
+				alert(name, _id)
+				//alert(id, name)
+				console.log(store.favorites)
+				const newFavoritesArray = [...store.favorites, {"_id" : _id  ,"name" : name}]
+				setStore({...store, favorites: newFavoritesArray})
+				console.log(store)
+			},
+
+
 			changeColor: (index, color) => {
 				//get the store
 				const store = getStore();
