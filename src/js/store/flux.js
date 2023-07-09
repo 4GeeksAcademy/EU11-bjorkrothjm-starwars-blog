@@ -128,6 +128,16 @@ const getState = ({ getStore, getActions, setStore }) => {
 				console.log(store)
 			},
 
+			removeFavorite: (eventId, store, urlId) => {
+				alert(urlId)
+				const updatedFavoritesArray = store.favorites.filter( (item) => {
+					if(!item === urlId){
+						return true
+					}
+				})
+				setStore({...store, favorites: updatedFavoritesArray});
+				console.log(store);
+			},
 
 			changeColor: (index, color) => {
 				//get the store
