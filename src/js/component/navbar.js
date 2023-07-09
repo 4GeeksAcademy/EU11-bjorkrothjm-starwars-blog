@@ -26,7 +26,7 @@ export const Navbar = () => {
 							store.favorites.map( (item) => {
 								return(
 									<div>
-										<li key={item._id}><a className="dropdown-item" href={"/single/:${item._id}"}>{item.name}</a></li>
+										<li key={item.urlId}><a className="dropdown-item" href={`/${item.urlId}`}>{item.name}</a></li>
 									</div>
 								);
 							})

@@ -61,8 +61,11 @@ const getState = ({ getStore, getActions, setStore }) => {
 					for (const item of unspecificApiData.results){
 						console.log(item.url)
 						let temp = await loadData(item.url)
+						const urlId = category+"-"+temp.result.uid
+						// const myObj = {String(temp.result.uid) :  temp.result.properties}
+						tempArrays[category].push( {"urlId" : urlId, "category": category, "uid" : temp.result.uid, "properties" : temp.result.properties} );
 						// tempArrays[category].push(temp.result.properties)
-						tempArrays[category].push(temp.result)
+						//tempArrays[category].push(temp.result)
 						//peopleArr.push (temp.result.properties) // OLD CODE - TO BE REMOVED
 					};
 					console.log("DONE")
@@ -118,12 +121,9 @@ const getState = ({ getStore, getActions, setStore }) => {
 		
 			},
 
-			addFavorite: (store, _id, name) => {
-				console.log(name, _id)
-				alert(name, _id)
-				//alert(id, name)
+			addFavorite: (store, urlId, category, uid, name) => {
 				console.log(store.favorites)
-				const newFavoritesArray = [...store.favorites, {"_id" : _id  ,"name" : name}]
+				const newFavoritesArray = [...store.favorites, {"urlId" : urlId, "category" : category, "uid" : uid, "name" : name}]
 				setStore({...store, favorites: newFavoritesArray})
 				console.log(store)
 			},
