@@ -85,22 +85,39 @@ const getState = ({ getStore, getActions, setStore }) => {
 				console.log(store.favorites)
 				console.log(store.favorites.length)
 
-				if (store.favorites.length > 0){
-					console.log("Favorites array Exist")
-					store.favorites.map( (item ) => {
-						console.log("Favorite item: ", item )
-						if (item.urlId === urlId){
-							console.log("Fav item = urlId :", item )
-							return;
-							console.log("WHY IS THIS STILL RUNNING?")
-							setStore({...store});
-						}
-					})
-				}
+				// WHY IS THIS NOT WORKING? 
+				// if (store.favorites.length > 0){
+				// 	console.log("Favorites array Exist")
+				// 	store.favorites.map( (item ) => {
+				// 		console.log("Favorite item: ", item )
+				// 		if (item.urlId === urlId){
+				// 			console.log("Fav item = urlId :", item )
+				// 			return;
+				// 			console.log("WHY IS THIS STILL RUNNING?")
+				// 			setStore({...store});
+				// 		}
+				// 	})
+				// }
+
+
+				// WHY IS THIS NOT WORKING ?
 				console.log("Add to favorites array")
-				const newFavoritesArray = [...store.favorites, {"urlId" : urlId, "category" : category, "uid" : uid, "name" : name}]
-				setStore({...store, favorites: newFavoritesArray})
-				console.log(store)			
+				const idArray = store.favorites.map( (item) => {
+					return item.urlId
+				})
+				console.log("idArray", idArray);
+				if (!(urlId in idArray )) {
+					console.log("urlId of item clicked:", urlId, "not in: ", idArray)
+					const newFavoritesArray = [...store.favorites, {"urlId" : urlId, "category" : category, "uid" : uid, "name" : name}]
+					setStore({...store, favorites: newFavoritesArray});
+				}
+
+				// if ( !( 'bar' in store.favorites ) ) {
+				// 	foo['bar'] = 42;
+				// }
+
+				// const newFavoritesArray = [...store.favorites, {"urlId" : urlId, "category" : category, "uid" : uid, "name" : name}]
+				// setStore({...store, favorites: newFavoritesArray})
 			},
 
 			removeFavorite: (eventId, store, urlId) => {

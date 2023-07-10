@@ -38,7 +38,7 @@ export const Home = () => {
 									<div className="d-flex justify-content-between">
 										<Link to={`/${item.urlId}`}>
 											<span className="btn custom-learn-button" href={`/${item.urlId}`} role="button">
-												Learn more LINK
+												Learn more
 											</span>
 										</Link>
 										<button className="btn custom-heart-button" onClick={() => actions.addFavorite(store, item.urlId, item.category, item.uid, item.properties.name)}>
