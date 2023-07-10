@@ -101,20 +101,39 @@ const getState = ({ getStore, getActions, setStore }) => {
 
 
 				// WHY IS THIS NOT WORKING ?
+				// console.log("Add to favorites array")
+				// const idArray = store.favorites.map( (item) => {
+				// 	return item.urlId
+				// })
+				// console.log("idArray", idArray);
+				// if (!(urlId in idArray )) {
+				// 	console.log("urlId of item clicked:", urlId, "not in: ", idArray)
+				// 	const newFavoritesArray = [...store.favorites, {"urlId" : urlId, "category" : category, "uid" : uid, "name" : name}]
+				// 	setStore({...store, favorites: newFavoritesArray});
+				// }
+
+
+				// WHY IS THIS NOT WORKING ?
 				console.log("Add to favorites array")
 				const idArray = store.favorites.map( (item) => {
 					return item.urlId
 				})
 				console.log("idArray", idArray);
-				if (!(urlId in idArray )) {
-					console.log("urlId of item clicked:", urlId, "not in: ", idArray)
+				const detector = 0
+				for (const idItem of idArray){
+					console.log("idItem", idItem);
+					console.log("urlId", urlId);
+					if (idItem.urlId === urlId){
+						detector+=1;
+					}
+				}
+				if (detector === 0){
+					console.log("detector", detector)
 					const newFavoritesArray = [...store.favorites, {"urlId" : urlId, "category" : category, "uid" : uid, "name" : name}]
 					setStore({...store, favorites: newFavoritesArray});
-				}
+				} 
 
-				// if ( !( 'bar' in store.favorites ) ) {
-				// 	foo['bar'] = 42;
-				// }
+
 
 				// const newFavoritesArray = [...store.favorites, {"urlId" : urlId, "category" : category, "uid" : uid, "name" : name}]
 				// setStore({...store, favorites: newFavoritesArray})
