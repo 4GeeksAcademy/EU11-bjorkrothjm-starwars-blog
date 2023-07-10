@@ -1,3 +1,5 @@
+import { oneOf } from "prop-types";
+
 const { json } = require("react-router");
 
 const getState = ({ getStore, getActions, setStore }) => {
@@ -77,64 +79,39 @@ const getState = ({ getStore, getActions, setStore }) => {
 				// setStore({people: tempArrays[people], })
 				setStore(tempArrays)
 				
-
-				// WORKING CODE
-
-				// const serverUrl = "https://www.swapi.tech/api/" + item
-				// const unspecificApiData = await loadData(serverUrl)
-				// console.log("unspecificApiData", unspecificApiData);
-				// const peopleArr = []
-
-				// for (const item of unspecificApiData.results){
-				// 	console.log(item.url)
-				// 	let temp = await loadData(item.url)
-				// 	peopleArr.push (temp.result.properties)
-				// };
-				// console.log("DONE")
-				// console.log(peopleArr)
-				// setStore({people: peopleArr})
-
-				//
-
-				// const resultArray  = await Promise.all(unspecificApiData.map( async (item) => {
-				// 	loadData2(item.url)
-				// }));
-				// console.log(resultArray)
-			
-
-
-				// const serverUrl = "https://www.swapi.tech/api/people"
-				// fetch(serverUrl)
-				// .then(res => res.json())
-				// // .then(data => console.log(data))
-				// .then(data => {
-				// 	console.log(data)
-				// 	console.log(data.results)
-				// 	data.results.forEach( (item) => {
-				// 		console.log(item.url)
-
-				// 	})
-				// 	setStore({demo: data.results})
-				// })
-				// .catch(err => console.error(err))
-
-		
 			},
 
 			addFavorite: (store, urlId, category, uid, name) => {
 				console.log(store.favorites)
+				console.log(store.favorites.length)
+
+				if (store.favorites.length > 0){
+					console.log("Favorites array Exist")
+					store.favorites.map( (item ) => {
+						console.log("Favorite item: ", item )
+						if (item.urlId === urlId){
+							console.log("Fav item = urlId :", item )
+							return;
+							console.log("WHY IS THIS STILL RUNNING?")
+							setStore({...store});
+						}
+					})
+				}
+				console.log("Add to favorites array")
 				const newFavoritesArray = [...store.favorites, {"urlId" : urlId, "category" : category, "uid" : uid, "name" : name}]
 				setStore({...store, favorites: newFavoritesArray})
-				console.log(store)
+				console.log(store)			
 			},
 
 			removeFavorite: (eventId, store, urlId) => {
-				alert(urlId)
+				//alert(urlId)
+				console.log("Current favorites array", store.favorites)
 				const updatedFavoritesArray = store.favorites.filter( (item) => {
-					if(!item === urlId){
+					if(item.urlId != urlId){
 						return true
 					}
 				})
+				console.log("Updated favorites array:", updatedFavoritesArray)
 				setStore({...store, favorites: updatedFavoritesArray});
 				console.log(store);
 			},

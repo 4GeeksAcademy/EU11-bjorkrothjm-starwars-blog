@@ -61,7 +61,7 @@ h2 {
 
 
 .inline-scroll {
-    overflow-x: scoll;
+    overflow-x: scroll;
     overflow-y: hidden;
     white-space: nowrap;
 }
