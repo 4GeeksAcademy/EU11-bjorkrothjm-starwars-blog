@@ -46,11 +46,11 @@ h2 {
 }
 .custom-heart-button:active {
     box-shadow: 2px 2px 20px rgb(244, 195, 72);
+    background-color: black;
 }
 
 .custom-heart-button-image {
     color: rgb(244, 195, 72);
-    fill: #0d6efd;
 }
 
 
