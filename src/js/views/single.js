@@ -16,9 +16,9 @@ export const Single = props => {
 	const propertiesHtml = (item) => {
 		console.log(category)
 		console.log(item)
-		if (category === "people"){
+		switch (category){
+			case "people":
 			return(
-
 				<div className="row d-flex">
 	
 					<div className="col-2">
@@ -44,6 +44,70 @@ export const Single = props => {
 					<div className="col-2">
 						<p>Eye color</p>
 						<p>{item.properties.eye_color}</p>
+					</div>
+						
+					<hr className="my-4" />
+				</div>
+			);
+			case "vehicles":
+			return(
+				<div className="row d-flex">
+
+					<div className="col-2">
+						<p>Name</p>
+						<p>{item.properties.name}</p>
+					</div>
+					<div className="col-2">
+						<p>Model</p>
+						<p>{item.properties.model}</p>
+					</div>
+					<div className="col-2">
+						<p>Vehicle class</p>
+						<p>{item.properties.vehicle_class}</p>
+					</div>
+					<div className="col-2">
+						<p>Length</p>
+						<p>{item.properties.length}</p>
+					</div>
+					<div className="col-2">
+						<p>Crew</p>
+						<p>{item.properties.crew}</p>
+					</div>
+					<div className="col-2">
+						<p>Passengers</p>
+						<p>{item.properties.passengers}</p>
+					</div>
+						
+					<hr className="my-4" />
+				</div>
+			);
+			case "planets":
+			return(
+				<div className="row d-flex">
+
+					<div className="col-2">
+						<p>Name</p>
+						<p>{item.properties.name}</p>
+					</div>
+					<div className="col-2">
+						<p>Climate</p>
+						<p>{item.properties.climate}</p>
+					</div>
+					<div className="col-2">
+						<p>Population</p>
+						<p>{item.properties.population}</p>
+					</div>
+					<div className="col-2">
+						<p>Orbital period</p>
+						<p>{item.properties.orbital_period}</p>
+					</div>
+					<div className="col-2">
+						<p>Rotation period</p>
+						<p>{item.properties.rotation_period}</p>
+					</div>
+					<div className="col-2">
+						<p>Diameter</p>
+						<p>{item.properties.diameter}</p>
 					</div>
 						
 					<hr className="my-4" />

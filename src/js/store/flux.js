@@ -54,7 +54,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 					favorites : []
 				};
 				// , "vehicles", "planets"
-				for (const category of ["people"]){
+				for (const category of ["people", "vehicles", "planets"]){
 					const serverUrl = "https://www.swapi.tech/api/" + category
 					const unspecificApiData = await loadData(serverUrl)
 					console.log("unspecificApiData", unspecificApiData);
