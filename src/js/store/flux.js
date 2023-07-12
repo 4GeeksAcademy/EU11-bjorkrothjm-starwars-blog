@@ -54,7 +54,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 					favorites : []
 				};
 				// , "vehicles", "planets"
-				for (const category of ["people", "vehicles", "planets"]){
+				for (const category of ["people"]){
 					const serverUrl = "https://www.swapi.tech/api/" + category
 					const unspecificApiData = await loadData(serverUrl)
 					console.log("unspecificApiData", unspecificApiData);
@@ -81,24 +81,31 @@ const getState = ({ getStore, getActions, setStore }) => {
 				
 			},
 
-			addFavorite: (store, urlId, category, uid, name) => {
-				console.log(store.favorites)
-				console.log(store.favorites.length)
+			addFavorite: (urlId, category, uid, name) => {
+				const store = getStore();
+				console.log(store.favorites);
+				console.log(store.favorites.length);
+				
+				console.log(urlId, category, uid, name);
+			
+				const idArray = store.favorites.map( (item) => {
+					return item.urlId
+				})
+				console.log(idArray);
 
-				// WHY IS THIS NOT WORKING? 
-				// if (store.favorites.length > 0){
-				// 	console.log("Favorites array Exist")
-				// 	store.favorites.map( (item ) => {
-				// 		console.log("Favorite item: ", item )
-				// 		if (item.urlId === urlId){
-				// 			console.log("Fav item = urlId :", item )
-				// 			return;
-				// 			console.log("WHY IS THIS STILL RUNNING?")
-				// 			setStore({...store});
-				// 		}
-				// 	})
-				// }
+				// const idArray = store.favorites.map( (item) => {
+				// 	return item.urlId
+				// });
 
+				if (!idArray.includes(urlId)){
+					console.log(urlId + "not in"+ idArray);
+					const newFavoritesArray = [...store.favorites, {"urlId" : urlId, "category" : category, "uid" : uid, "name" : name}]
+					setStore({...store, favorites: newFavoritesArray});
+				}
+
+
+
+				
 
 				// WHY IS THIS NOT WORKING ?
 				// console.log("Add to favorites array")
@@ -114,29 +121,31 @@ const getState = ({ getStore, getActions, setStore }) => {
 
 
 				// WHY IS THIS NOT WORKING ?
-				console.log("Add to favorites array")
-				const idArray = store.favorites.map( (item) => {
-					return item.urlId
-				})
-				console.log("idArray", idArray);
-				const detector = 0
-				for (const idItem of idArray){
-					console.log("idItem", idItem);
-					console.log("urlId", urlId);
-					if (idItem.urlId === urlId){
-						detector+=1;
-					}
-				}
-				if (detector === 0){
-					console.log("detector", detector)
-					const newFavoritesArray = [...store.favorites, {"urlId" : urlId, "category" : category, "uid" : uid, "name" : name}]
-					setStore({...store, favorites: newFavoritesArray});
-				} 
+				// console.log("Add to favorites array")
+				// const idArray = store.favorites.map( (item) => {
+				// 	return item.urlId
+				// })
+				// console.log("idArray", idArray);
+				// const detector = 0
+				// for (const idItem of idArray){
+				// 	console.log("idItem", idItem);
+				// 	console.log("urlId", urlId);
+				// 	if (idItem.urlId === urlId){
+				// 		console.log("EQUALS");
+				// 		detector+=1;
+				// 	}
+				// }
+				// if (detector === 0){
+				// 	console.log("detector", detector)
+				// 	const newFavoritesArray = [...store.favorites, {"urlId" : urlId, "category" : category, "uid" : uid, "name" : name}]
+				// 	setStore({...store, favorites: newFavoritesArray});
+				// }
 
 
-
+				// ORIGINAL - JUST ADDING WITHOUT TAKING INTO ACCOUNT DUPLICATES
 				// const newFavoritesArray = [...store.favorites, {"urlId" : urlId, "category" : category, "uid" : uid, "name" : name}]
 				// setStore({...store, favorites: newFavoritesArray})
+
 			},
 
 			removeFavorite: (eventId, store, urlId) => {
