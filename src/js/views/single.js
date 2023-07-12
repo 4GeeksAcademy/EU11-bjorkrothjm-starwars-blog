@@ -14,8 +14,9 @@ export const Single = props => {
 	console.log(uid)
 
 	const propertiesHtml = (item) => {
-		console.log({category})
-		if ({category} === "people"){
+		console.log(category)
+		console.log(item)
+		if (category === "people"){
 			return(
 
 				<div className="row d-flex">
@@ -76,42 +77,7 @@ export const Single = props => {
 								<hr className="my-4" />	
 							</div>
 
-						{propertiesHtml({item})}
-
-						if ({category} === "people"){
-							
-								<div className="row d-flex">
-
-									<div className="col-2">
-										<p>Name</p>
-										<p>{item.properties.name}</p>
-									</div>
-									<div className="col-2">
-										<p>Birth Year</p>
-										<p>{item.properties.birth_year}</p>
-									</div>
-									<div className="col-2">
-										<p>Gender</p>
-										<p>{item.properties.gender}</p>
-									</div>
-									<div className="col-2">
-										<p>Gender</p>
-										<p>{item.properties.height}</p>
-									</div>
-									<div className="col-2">
-										<p>Skin color</p>
-										<p>{item.properties.skin_color}</p>
-									</div>
-									<div className="col-2">
-										<p>Eye color</p>
-										<p>{item.properties.eye_color}</p>
-									</div>
-										
-									<hr className="my-4" />
-								</div>
-						
-						}
-					
+							{propertiesHtml(item)}
 
 							<Link to="/">
 								<span className="btn btn-primary btn-lg" href="#" role="button">
