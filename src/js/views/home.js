@@ -22,14 +22,14 @@ export const Home = () => {
 		<div className="container">
 
 			<div className="category-container">
-				<div className="row"  >
+				<div className="row">
 					<h2>Characters</h2>
 				</div>
 				<div className="inline-scroll">
 					{store.people.map( (item, index, array) => {
 						
 						return(
-							<div key={item.urlId} className="card" style={{width: "18rem", display: "inline-block", marginRight: "15px"}}>
+							<div key={item.urlId} className="card custom-card">
 								<img src="https://via.placeholder.com/400x200?text=400x200" className="card-img-top" alt="..."/>
 								<div className="card-body">
 									<h5 className="card-title">{item.properties.name}</h5>
@@ -61,7 +61,7 @@ export const Home = () => {
 					{store.vehicles.map( (item, index, array) => {
 						
 						return(
-							<div key={item.urlId} className="card" style={{width: "18rem", display: "inline-block", marginRight: "15px"}}>
+							<div key={item.urlId} className="card custom-card">
 								<img src="https://via.placeholder.com/400x200?text=400x200" className="card-img-top" alt="..."/>
 								<div className="card-body">
 									<h5 className="card-title">{item.properties.name}</h5>
@@ -87,7 +87,7 @@ export const Home = () => {
 			</div>
 			<div className="category-container">
 				<div className="row"  >
-					<h2>Characters</h2>
+					<h2>Planets</h2>
 				</div>
 				<div className="inline-scroll">
 					{store.planets.map( (item, index, array) => {

@@ -13,3 +13,16 @@
     padding: 30px;
     text-align: center;
 }
+
+.category-fact-container {
+    margin: auto;
+}
+
+.fact-text {
+    word-break: break-all;
+    white-space: normal;
+}
+
+.back-to-home-btn{
+    font-size: 15px;
+}

@@ -19,31 +19,31 @@ export const Single = props => {
 		switch (category){
 			case "people":
 			return(
-				<div className="row d-flex">
+				<div className="row d-flex category-fact-container">
 	
-					<div className="col-2">
-						<p>Name</p>
-						<p>{item.properties.name}</p>
+					<div className="col-sm-4 col-md-2">
+						<p><strong>Name:</strong></p>
+						<p className="fact-text">{item.properties.name}</p>
 					</div>
-					<div className="col-2">
-						<p>Birth Year</p>
-						<p>{item.properties.birth_year}</p>
+					<div className="col-sm-4 col-md-2">
+						<p><strong>Birth Year:</strong></p>
+						<p className="fact-text">{item.properties.birth_year}</p>
 					</div>
-					<div className="col-2">
-						<p>Gender</p>
-						<p>{item.properties.gender}</p>
+					<div className="col-sm-4 col-md-2">
+						<p><strong>Gender:</strong></p>
+						<p className="fact-text">{item.properties.gender}</p>
 					</div>
-					<div className="col-2">
-						<p>Gender</p>
-						<p>{item.properties.height}</p>
+					<div className="col-sm-4 col-md-2">
+						<p><strong>Height:</strong></p>
+						<p className="fact-text">{item.properties.height}</p>
 					</div>
-					<div className="col-2">
-						<p>Skin color</p>
-						<p>{item.properties.skin_color}</p>
+					<div className="col-sm-4 col-md-2">
+						<p><strong>Skin color:</strong></p>
+						<p className="fact-text">{item.properties.skin_color}</p>
 					</div>
-					<div className="col-2">
-						<p>Eye color</p>
-						<p>{item.properties.eye_color}</p>
+					<div className="col-sm-4 col-md-2">
+						<p><strong>Eye color:</strong></p>
+						<p className="fact-text">{item.properties.eye_color}</p>
 					</div>
 						
 					<hr className="my-4" />
@@ -51,31 +51,31 @@ export const Single = props => {
 			);
 			case "vehicles":
 			return(
-				<div className="row d-flex">
+				<div className="row d-flex category-fact-container">
 
-					<div className="col-2">
-						<p>Name</p>
-						<p>{item.properties.name}</p>
+					<div className="col-sm-4 col-md-2">
+						<p><strong>Name:</strong></p>
+						<p className="fact-text">{item.properties.name}</p>
 					</div>
-					<div className="col-2">
-						<p>Model</p>
-						<p>{item.properties.model}</p>
+					<div className="col-sm-4 col-md-2">
+						<p><strong>Model:</strong></p>
+						<p className="fact-text">{item.properties.model}</p>
 					</div>
-					<div className="col-2">
-						<p>Vehicle class</p>
-						<p>{item.properties.vehicle_class}</p>
+					<div className="col-sm-4 col-md-2">
+						<p><strong>Vehicle class:</strong></p>
+						<p className="fact-text">{item.properties.vehicle_class}</p>
 					</div>
-					<div className="col-2">
-						<p>Length</p>
-						<p>{item.properties.length}</p>
+					<div className="col-sm-4 col-md-2">
+						<p><strong>Length:</strong></p>
+						<p className="fact-text">{item.properties.length}</p>
 					</div>
-					<div className="col-2">
-						<p>Crew</p>
-						<p>{item.properties.crew}</p>
+					<div className="col-sm-4 col-md-2">
+						<p><strong>Crew:</strong></p>
+						<p className="fact-text">{item.properties.crew}</p>
 					</div>
-					<div className="col-2">
-						<p>Passengers</p>
-						<p>{item.properties.passengers}</p>
+					<div className="col-sm-4 col-md-2">
+						<p><strong>Passengers:</strong></p>
+						<p className="fact-text">{item.properties.passengers}</p>
 					</div>
 						
 					<hr className="my-4" />
@@ -83,31 +83,31 @@ export const Single = props => {
 			);
 			case "planets":
 			return(
-				<div className="row d-flex">
+				<div className="row d-flex category-fact-container">
 
-					<div className="col-2">
-						<p>Name</p>
-						<p>{item.properties.name}</p>
+					<div className="col-sm-4 col-md-2">
+						<p><strong>Name:</strong></p>
+						<p className="fact-text">{item.properties.name}</p>
 					</div>
-					<div className="col-2">
-						<p>Climate</p>
-						<p>{item.properties.climate}</p>
+					<div className="col-sm-4 col-md-2">
+						<p><strong>Climate:</strong></p>
+						<p className="fact-text">{item.properties.climate}</p>
 					</div>
-					<div className="col-2">
-						<p>Population</p>
-						<p>{item.properties.population}</p>
+					<div className="col-sm-4 col-md-2">
+						<p><strong>Population:</strong></p>
+						<p className="fact-text">{item.properties.population}</p>
 					</div>
-					<div className="col-2">
-						<p>Orbital period</p>
-						<p>{item.properties.orbital_period}</p>
+					<div className="col-sm-4 col-md-2">
+						<p><strong>Orbital period:</strong></p>
+						<p className="fact-text">{item.properties.orbital_period}</p>
 					</div>
-					<div className="col-2">
-						<p>Rotation period</p>
-						<p>{item.properties.rotation_period}</p>
+					<div className="col-sm-4 col-md-2">
+						<p><strong>Rotation period:</strong></p>
+						<p className="fact-text">{item.properties.rotation_period}</p>
 					</div>
-					<div className="col-2">
-						<p>Diameter</p>
-						<p>{item.properties.diameter}</p>
+					<div className="col-sm-4 col-md-2">
+						<p><strong>Diameter:</strong></p>
+						<p className="fact-text">{item.properties.diameter}</p>
 					</div>
 						
 					<hr className="my-4" />
@@ -144,7 +144,7 @@ export const Single = props => {
 							{propertiesHtml(item)}
 
 							<Link to="/">
-								<span className="btn btn-primary btn-lg" href="#" role="button">
+								<span className="btn btn-primary btn-lg back-to-home-btn" href="#" role="button">
 									Back home
 								</span>
 							</Link>

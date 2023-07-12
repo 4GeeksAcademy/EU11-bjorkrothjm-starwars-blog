@@ -1,0 +1,35 @@
+
+
+.navbar-custom {
+    flex-wrap: nowrap;
+}
+
+.li-custom {
+    font-size: 14px;
+    overflow-x: hidden;
+}
+
+.navbar-fav-button{
+    font-size: 15px;
+}
+
+.trash-icon-container{
+    padding-top: 2px;
+    margin-right: 4px;
+
+}
+
+.container-item-left {
+    width: 100px;
+    margin-left: 90px; 
+    padding-left: 12px;
+    margin-right: 10px;
+    
+}
+
+.container-item-right {
+    width: 100px;
+    margin-right: 90px; 
+    padding-right: 12px;
+    margin-left: 10px;
+}
