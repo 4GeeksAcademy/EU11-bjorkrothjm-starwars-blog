@@ -1,4 +1,5 @@
-import { oneOf } from "prop-types";
+import { array, oneOf } from "prop-types";
+import { useState } from "react";
 
 const { json } = require("react-router");
 
@@ -54,7 +55,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 					favorites : []
 				};
 				// , "vehicles", "planets"
-				for (const category of ["people"]){
+				for (const category of ["people", "vehicles", "planets"]){
 					const serverUrl = "https://www.swapi.tech/api/" + category
 					const unspecificApiData = await loadData(serverUrl)
 					console.log("unspecificApiData", unspecificApiData);
@@ -65,7 +66,8 @@ const getState = ({ getStore, getActions, setStore }) => {
 						let temp = await loadData(item.url)
 						const urlId = category+"-"+temp.result.uid
 						// const myObj = {String(temp.result.uid) :  temp.result.properties}
-						tempArrays[category].push( {"urlId" : urlId, "category": category, "uid" : temp.result.uid, "properties" : temp.result.properties} );
+						// const [toggle, setToggle] = useState("0");
+						tempArrays[category].push( {"urlId" : urlId, "category": category, "uid" : temp.result.uid, "properties" : temp.result.properties, likeToggle: "0"} );
 						// tempArrays[category].push(temp.result.properties)
 						//tempArrays[category].push(temp.result)
 						//peopleArr.push (temp.result.properties) // OLD CODE - TO BE REMOVED
@@ -81,75 +83,46 @@ const getState = ({ getStore, getActions, setStore }) => {
 				
 			},
 
-			addFavorite: (urlId, category, uid, name) => {
+			handleFavorite: (urlId, category, uid, name) => {
 				const store = getStore();
-				console.log(store.favorites);
-				console.log(store.favorites.length);
-				
-				console.log(urlId, category, uid, name);
-			
+				const actions = getActions()
+				for (const index of store[category].keys()){
+					if (urlId === store[category][index].urlId){
+						console.log(store[category][index].likeToggle)
+						const arrayToUpdate = store[category][index]
+						arrayToUpdate.likeToggle === "0"
+							? arrayToUpdate.likeToggle = "1" 
+							: arrayToUpdate.likeToggle = "0" 
+						//const updatedCategoryArray = store[category][index] = arrayToUpdate;
+						//console.log("updatedFavoritesArray", updatedCategoryArray);
+						//setStore({...store, category : updatedCategoryArray})
+						console.log("store after Update: ", store);
+					}
+				};
 				const idArray = store.favorites.map( (item) => {
 					return item.urlId
-				})
+				});
 				console.log(idArray);
-
-				// const idArray = store.favorites.map( (item) => {
-				// 	return item.urlId
-				// });
-
 				if (!idArray.includes(urlId)){
-					console.log(urlId + "not in"+ idArray);
-					const newFavoritesArray = [...store.favorites, {"urlId" : urlId, "category" : category, "uid" : uid, "name" : name}]
-					setStore({...store, favorites: newFavoritesArray});
+					console.log(urlId + " not in favorites array:"+ idArray);
+					console.log("Adding...")
+					actions.addFavorite(urlId, category, uid, name)
 				}
-
-
-
+				else{
+					console.log(urlId + " in favorites array: "+ idArray);
+					console.log("Removing...");
+					actions.removeFavorite(urlId)
+				}
 				
-
-				// WHY IS THIS NOT WORKING ?
-				// console.log("Add to favorites array")
-				// const idArray = store.favorites.map( (item) => {
-				// 	return item.urlId
-				// })
-				// console.log("idArray", idArray);
-				// if (!(urlId in idArray )) {
-				// 	console.log("urlId of item clicked:", urlId, "not in: ", idArray)
-				// 	const newFavoritesArray = [...store.favorites, {"urlId" : urlId, "category" : category, "uid" : uid, "name" : name}]
-				// 	setStore({...store, favorites: newFavoritesArray});
-				// }
-
-
-				// WHY IS THIS NOT WORKING ?
-				// console.log("Add to favorites array")
-				// const idArray = store.favorites.map( (item) => {
-				// 	return item.urlId
-				// })
-				// console.log("idArray", idArray);
-				// const detector = 0
-				// for (const idItem of idArray){
-				// 	console.log("idItem", idItem);
-				// 	console.log("urlId", urlId);
-				// 	if (idItem.urlId === urlId){
-				// 		console.log("EQUALS");
-				// 		detector+=1;
-				// 	}
-				// }
-				// if (detector === 0){
-				// 	console.log("detector", detector)
-				// 	const newFavoritesArray = [...store.favorites, {"urlId" : urlId, "category" : category, "uid" : uid, "name" : name}]
-				// 	setStore({...store, favorites: newFavoritesArray});
-				// }
-
-
-				// ORIGINAL - JUST ADDING WITHOUT TAKING INTO ACCOUNT DUPLICATES
-				// const newFavoritesArray = [...store.favorites, {"urlId" : urlId, "category" : category, "uid" : uid, "name" : name}]
-				// setStore({...store, favorites: newFavoritesArray})
+			},
+			addFavorite: (urlId, category, uid, name) => {
+				const store = getStore();
+				const newFavoritesArray = [...store.favorites, {"urlId" : urlId, "category" : category, "uid" : uid, "name" : name}]
+				setStore({...store, favorites: newFavoritesArray});
 
 			},
-
-			removeFavorite: (eventId, store, urlId) => {
-				//alert(urlId)
+			removeFavorite: (urlId) => {
+				const store = getStore();
 				console.log("Current favorites array", store.favorites)
 				const updatedFavoritesArray = store.favorites.filter( (item) => {
 					if(item.urlId != urlId){
